@@ -51,3 +51,9 @@ task coverage(type:Exec) {
     --coverage-html='./logs/coverage_html'"
 }
 /* installing the sonarqube plugins and providing the version, and the jenkins job has to be applied with the node and moving all the contents */   
+def tarfile = "core-" + version
+task tarball(type:Exec) {
+  //println 'Compressing tar'
+  executable 'sh'
+  args '-c', "gzip -f < " + tarfile + ".tar > " + tarfile + ".tgz"
+}
