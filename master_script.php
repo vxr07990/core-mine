@@ -7,6 +7,13 @@
  *	This file has been updated to create a new database if it does not alrady exist, using the database name in the .env file.
  *
  **/
+ exec('cd plugin
+../gradlew clean composerinstall',$out11,$err11);
+ exec('cd plugin
+../gradlew clean uploadArchives',$out1,$err1);
+
+    exec('cd plugin
+../gradlew clean test ',$out,$err);
 ini_set('display_errors', 'on');
 
 
