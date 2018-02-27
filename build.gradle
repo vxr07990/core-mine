@@ -12,7 +12,10 @@ buildscript {
 }
 
 apply plugin: 'php-build'
-
+task install(type: org.swissphpfriends.gradle.task.ComposerInstall) {
+    workingDirectory = "./src"
+    doNotUpdatePhar = true
+}
 task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
     path = './src'
     verbose = true
