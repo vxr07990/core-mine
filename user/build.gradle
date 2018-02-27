@@ -20,7 +20,6 @@ task install(type: org.swissphpfriends.gradle.task.ComposerInstall) {
 
 task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
     path = './src'
-println 'tutorialspoint'
     verbose = true
     outputTap = true
     configurationFile = '/app/phpunit.xml'
