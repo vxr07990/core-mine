@@ -1,4 +1,4 @@
-apply plugin: "org.hasnat.php-build-plugin"
+
 buildscript {
   repositories {
     maven {
@@ -9,10 +9,10 @@ buildscript {
     classpath "gradle.plugin.org.swissphpfriends:php-build-plugin:0.1-SNAPSHOT"
   }
 }
-task test1(type: org.swissphpfriends.gradle.task.PhpUnit) {
-    path = './repo'
-    verbose = true
-    outputTap = true
+apply plugin: "org.hasnat.php-build-plugin"
+task test(type: Copy) {
+    from 'https://plugins.gradle.org/m2/gradle/plugin/org/swissphpfriends/php-build-plugin/'             // source directory
+    into './repo'   // target directory
 }
 
 
