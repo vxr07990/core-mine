@@ -1,85 +1,31 @@
-task purge << {
-  //println 'Cleaning up old files'
-  delete 'vendor', 'logs', 'build', 'composer.phar'
-}
-//The next step was to re-install composer, as we had just deleted the old installation, and the all the dependencies of the application, executing the shell commands
-task composer(type:Exec) {
-  //println 'Setting up dependencies'
-  executable 'sh'
-  args '-c', 'php -r "readfile(\'https://getcomposer.org/installer\');" | php'
-  standardOutput = new ByteArrayOutputStream()
-  ext.output = { return standardOutput.toString() }
-}
-// executing the vendor dependencies of the composer.phar
-task vendor(type:Exec) {
-  //println 'Installing dependencies'
-  executable 'sh'
-  args '-c', 'php composer.phar install'
-  standardOutput = new ByteArrayOutputStream()
-  ext.output = { return standardOutput.toString() }
-}
-// downloading the gulp packaging tasks and executing it through the shell
-task gulp(type:Exec) {
-  //println 'Performing gulp packaging tasks;
-  executable 'sh'
-  args '-c', "gulp"
-}
-// performing the npm installation tasks and executing the shell commands
-task npmInstall(type:Exec) {
-  //println 'Performing NPM installation tasks
-  executable 'sh'
-  args '-c', "npm install font-awesome; npm install"
-}
-// 
-task test(type:Exec) {
-  //println 'Executing tests'
-  executable 'sh'
-  args '-c', "php \
-    -d 'date.timezone=\'America/Chicago\'' \
-    'vendor/phpunit/phpunit/phpunit' \
-    --log-junit='./logs/unitreport.xml'"
-}
-// running the tests of the phpunit and coverage reports through the plugins 
-task coverage(type:Exec) {
-  //println 'Executing code coverage via executing tests with instrumented code'
-  executable 'sh'
-  args '-c', "php \
-    -d 'date.timezone=\'America/Chicago\'' \
-    'vendor/phpunit/phpunit/phpunit' \
-    --log-junit='./logs/unitreport.xml' \
-    --coverage-clover='./logs/clover.xml' \
-    --coverage-html='./logs/coverage_html'"
-}
-def jenkinsJob = System.getenv("JOB_NAME") ?: "Default"
-apply plugin: "distribution"
-def majorVersion = System.getenv("MAJOR_VERSION") ?: "1"
-def minorVersion = System.getenv("MINOR_VERSION") ?: "0"
-def jenkinsBuild = System.getenv("BUILD_NUMBER") ?: "0"
-version = majorVersion + "." + minorVersion + "." + jenkinsBuild
-distributions {
-  application {
-    baseName = 'core'
-    contents {
-      from ('storage/*') {
-        into 'storage/*'
-        from ('user_privileges/*') 
-        into 'user_privileges/*'
-        from ('test/*') 
-        into 'test/*'
-        from ('logs/*') 
-        into 'logs/*'
+apply plugin: 'groovy'
 
-        dirMode 0775
-      }
-      from ('vendor/*') { into 'vendor/*' }
-      from { '_migrate.php' }
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+apply plugin: 'maven'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+}
+apply plugin: 'signing'
+apply plugin: 'license'
+
+buildscript {
+    repositories {
+        mavenCentral()
     }
-  }
+
+    dependencies {
+        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
+    }
 }
-/* installing the sonarqube plugins and providing the version, and the jenkins job has to be applied with the node and moving all the contents */   
-def tarfile = "build/distributions/core-" + version
-task tarball(type:Exec) {
-  //println 'Compressing tar'
-  executable 'sh'
-  args '-c', "gzip -f < " + tarfile + ".tar > " + tarfile + ".tgz"
-}
+
+group = 'com.eltrino.gradle'
+version = '1.0'
