@@ -1,14 +1,18 @@
 buildscript {
-    repositories {
-        maven {
-            url 'https://plugins.gradle.org/m2/gradle/plugin'
-        }
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
     }
-    dependencies {
-        classpath group: 'org.swissphpfriends',
-                name: 'php-build-plugin',
-                version: '0.1-SNAPSHOT'
-    }
+  }
+  dependencies {
+    classpath "gradle.plugin.org.swissphpfriends:php-build-plugin:0.1-SNAPSHOT"
+  }
 }
 
-apply plugin: 'php-build'
+apply plugin: "org.hasnat.php-build-plugin"
+
+task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
+    path = '/user/'
+    verbose = true
+    outputTap = true
+}
