@@ -8,11 +8,6 @@ buildscript {
   dependencies {
     classpath "gradle.plugin.org.swissphpfriends:php-build-plugin:0.1-SNAPSHOT"
   }
-}
-
-apply plugin: "org.hasnat.php-build-plugin"
-
-
 task install(type: org.swissphpfriends.gradle.task.ComposerInstall) {
     workingDirectory = "./plugin/"
     doNotUpdatePhar = true
@@ -25,3 +20,10 @@ task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
     configurationFile = '/app/phpunit.xml'
     bootstrapFile = 'test/bootstrap.php'
 }
+
+}
+
+apply plugin: "org.hasnat.php-build-plugin"
+
+
+
