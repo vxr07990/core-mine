@@ -8,8 +8,8 @@ buildscript {
     classpath "gradle.plugin.org.swissphpfriends:php-build-plugin:0.1-SNAPSHOT"
   }
 }
-task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
-    path = './src'
+task test1(type: org.swissphpfriends.gradle.task.PhpUnit) {
+    path = './repo'
     verbose = true
     outputTap = true
 }
