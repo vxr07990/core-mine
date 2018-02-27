@@ -52,6 +52,10 @@ task coverage(type:Exec) {
 }
 def jenkinsJob = System.getenv("JOB_NAME") ?: "Default"
 apply plugin: "distribution"
+def majorVersion = System.getenv("MAJOR_VERSION") ?: "1"
+def minorVersion = System.getenv("MINOR_VERSION") ?: "0"
+def jenkinsBuild = System.getenv("BUILD_NUMBER") ?: "0"
+version = majorVersion + "." + minorVersion + "." + jenkinsBuild
 distributions {
   application {
     baseName = 'core'
@@ -73,7 +77,7 @@ distributions {
   }
 }
 /* installing the sonarqube plugins and providing the version, and the jenkins job has to be applied with the node and moving all the contents */   
-def tarfile = "core-" + version
+def tarfile = "build/distributions/core-" + version
 task tarball(type:Exec) {
   //println 'Compressing tar'
   executable 'sh'
