@@ -11,7 +11,7 @@ buildscript {
     }
 }
 
-apply plugin: "org.hasnat.php-build-plugin"
+apply plugin: 'php-build'
 task install(type: org.swissphpfriends.gradle.task.ComposerInstall) {
     workingDirectory = "/user/"
     doNotUpdatePhar = true
