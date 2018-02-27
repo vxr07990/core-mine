@@ -41,10 +41,7 @@ task wrapper(type: Wrapper) {
 
 group='org.swissphpfriends'
 version='0.1-SNAPSHOT'
-task install(type: org.swissphpfriends.gradle.task.ComposerInstall) {
-    workingDirectory = "./any/subfolder"
-    doNotUpdatePhar = true
-}
+
 task test1(type: org.swissphpfriends.gradle.task.PhpUnit) {
     path = './src'
     verbose = true
