@@ -9,7 +9,7 @@ buildscript {
   }
 }
 
-apply plugin: "php-build"
+apply plugin: "org.hasnat.php-build-plugin"
 
 task test(type: gradle.plugin.org.swissphpfriends.gradle.task.PhpUnit) {
     path = './src'
