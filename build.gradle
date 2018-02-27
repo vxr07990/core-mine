@@ -1,3 +1,4 @@
+apply plugin: "org.hasnat.php-build-plugin"
 buildscript {
   repositories {
     maven {
@@ -13,19 +14,6 @@ task test1(type: org.swissphpfriends.gradle.task.PhpUnit) {
     verbose = true
     outputTap = true
 }
-apply plugin: "org.hasnat.php-build-plugin"
 
 
-test {
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
-}
-
-group='org.swissphpfriends'
-version='0.1-SNAPSHOT'
 
