@@ -13,7 +13,22 @@ buildscript {
 apply plugin: "org.hasnat.php-build-plugin"
 
 
-
-
+task installDeps(type: org.swissphpfriends.task.ComposerInstall) {
+    workingDirectory = "./user/src"
+    doNotUpdatePhar = true
+}
+task test(type: org.swissphpfriends.task.PhpUnit) {
+    path = "./user/src"
+    verbose = true
+    outputTap = true
+    outputTestdox = false
+    groupIncludeMode = true
+    groupExcludeMode = false
+    groups = "unit"
+    configurationFile = "/app/phpunit.xml"
+    bootstrapFile = "test/bootstrap.php"
+    coverageFormat = "html"
+    coverageTarget = "build/coverage"
+}
 
 
