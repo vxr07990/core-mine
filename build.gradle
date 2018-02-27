@@ -1,6 +1,4 @@
-plugins {
-  id "org.hasnat.php-build-plugin" version "0.1-SNAPSHOT"
-}
+
 buildscript {
     repositories {
         maven {
