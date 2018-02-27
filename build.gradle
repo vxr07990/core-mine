@@ -11,7 +11,7 @@ buildscript {
 
 apply plugin: "php-build"
 
-task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
+task test(type: gradle.plugin.org.swissphpfriends.gradle.task.PhpUnit) {
     path = './src'
     verbose = true
     outputTap = true
