@@ -50,6 +50,27 @@ task coverage(type:Exec) {
     --coverage-clover='./logs/clover.xml' \
     --coverage-html='./logs/coverage_html'"
 }
+def jenkinsJob = System.getenv("JOB_NAME") ?: "Default"
+distributions {
+  application {
+    baseName = 'core'
+    contents {
+      from ('storage/*') {
+        into 'storage/*'
+        from ('user_privileges/*') 
+        into 'user_privileges/*'
+        from ('test/*') 
+        into 'test/*'
+        from ('logs/*') 
+        into 'logs/*'
+
+        dirMode 0775
+      }
+      from ('vendor/*') { into 'vendor/*' }
+      from { '_migrate.php' }
+    }
+  }
+}
 /* installing the sonarqube plugins and providing the version, and the jenkins job has to be applied with the node and moving all the contents */   
 def tarfile = "core-" + version
 task tarball(type:Exec) {
