@@ -1,31 +1,59 @@
-apply plugin: 'groovy'
-
-dependencies {
-    compile gradleApi()
-    compile localGroovy()
+task purge << {
+  //println 'Cleaning up old files'
+  delete 'vendor', 'logs', 'build', 'composer.phar'
 }
-
-apply plugin: 'maven'
-
-repositories {
-    mavenCentral()
+//The next step was to re-install composer, as we had just deleted the old installation, and the all the dependencies of the application, executing the shell commands
+task composer(type:Exec) {
+  //println 'Setting up dependencies'
+  executable 'sh'
+  args '-c', 'php -r "readfile(\'https://getcomposer.org/installer\');" | php'
+  standardOutput = new ByteArrayOutputStream()
+  ext.output = { return standardOutput.toString() }
 }
-
-dependencies {
-    testCompile 'junit:junit:4.11'
+// executing the vendor dependencies of the composer.phar
+task vendor(type:Exec) {
+  //println 'Installing dependencies'
+  executable 'sh'
+  args '-c', 'php composer.phar install'
+  standardOutput = new ByteArrayOutputStream()
+  ext.output = { return standardOutput.toString() }
 }
-apply plugin: 'signing'
-apply plugin: 'license'
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
-    }
+// downloading the gulp packaging tasks and executing it through the shell
+task gulp(type:Exec) {
+  //println 'Performing gulp packaging tasks;
+  executable 'sh'
+  args '-c', "gulp"
 }
-
-group = 'com.eltrino.gradle'
-version = '1.0'
+// performing the npm installation tasks and executing the shell commands
+task npmInstall(type:Exec) {
+  //println 'Performing NPM installation tasks
+  executable 'sh'
+  args '-c', "npm install font-awesome; npm install"
+}
+// 
+task test(type:Exec) {
+  //println 'Executing tests'
+  executable 'sh'
+  args '-c', "php \
+    -d 'date.timezone=\'America/Chicago\'' \
+    'vendor/phpunit/phpunit/phpunit' \
+    --log-junit='./logs/unitreport.xml'"
+}
+// running the tests of the phpunit and coverage reports through the plugins 
+task coverage(type:Exec) {
+  //println 'Executing code coverage via executing tests with instrumented code'
+  executable 'sh'
+  args '-c', "php \
+    -d 'date.timezone=\'America/Chicago\'' \
+    'vendor/phpunit/phpunit/phpunit' \
+    --log-junit='./logs/unitreport.xml' \
+    --coverage-clover='./logs/clover.xml' \
+    --coverage-html='./logs/coverage_html'"
+}
+/* installing the sonarqube plugins and providing the version, and the jenkins job has to be applied with the node and moving all the contents */   
+def tarfile = "core-" + version
+task tarball(type:Exec) {
+  //println 'Compressing tar'
+  executable 'sh'
+  args '-c', "gzip -f < " + tarfile + ".tar > " + tarfile + ".tgz"
+}
