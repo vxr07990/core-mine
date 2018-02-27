@@ -13,12 +13,12 @@ buildscript {
 apply plugin: "org.hasnat.php-build-plugin"
 
 
-task installDeps(type: org.swissphpfriends.task.ComposerInstall) {
-    workingDirectory = "./user/src"
+task installDeps(type: org.swissphpfriends.gradle.task.ComposerInstall) {
+    workingDirectory = "./"
     doNotUpdatePhar = true
 }
-task test(type: org.swissphpfriends.task.PhpUnit) {
-    path = "./user/src"
+task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
+    path = "./"
     verbose = true
     outputTap = true
     outputTestdox = false
