@@ -13,22 +13,6 @@ buildscript {
 apply plugin: "org.hasnat.php-build-plugin"
 
 
-task installDeps(type: org.swissphpfriends.gradle.task.ComposerInstall) {
-    workingDirectory = "./"
-    doNotUpdatePhar = true
+plugins {
+  id "org.hasnat.php-build-plugin" version "0.1-SNAPSHOT"
 }
-task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
-    path = "./"
-    verbose = true
-    outputTap = true
-    outputTestdox = false
-    groupIncludeMode = true
-    groupExcludeMode = false
-    groups = "unit"
-    configurationFile = "/app/phpunit.xml"
-    bootstrapFile = "test/bootstrap.php"
-    coverageFormat = "html"
-    coverageTarget = "build/coverage"
-}
-
-
