@@ -1,22 +1,38 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "gradle.plugin.org.swissphpfriends:php-build-plugin:0.1-SNAPSHOT"
+  }
+}
+
+apply plugin: "org.hasnat.php-build-plugin"
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
 dependencies {
-    compile gradleApi()
+    
+compile gradleApi()
     compile localGroovy()
 }
+
 
 repositories {
     mavenCentral()
 }
 
-uploadArchives {
+uploadArchives 
+{
     repositories {
         mavenDeployer {
-            repository(url:'https://plugins.gradle.org/m2/gradle/plugin')
+            repository(url: uri('../repo'))
         }
     }
 }
+
 
 test {
     testLogging {
@@ -24,9 +40,11 @@ test {
     }
 }
 
-task wrapper(type: Wrapper) {
+task wrapper(type: Wrapper) 
+{
     gradleVersion = '2.0'
 }
+
 
 group='org.swissphpfriends'
 version='0.1-SNAPSHOT'
