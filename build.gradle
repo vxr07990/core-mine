@@ -9,13 +9,6 @@ buildscript {
     classpath "gradle.plugin.org.swissphpfriends:php-build-plugin:0.1-SNAPSHOT"
   }
 
-
-
-
-}
-
-apply plugin: 'php-build'
-
 task install(type: org.swissphpfriends.gradle.task.ComposerInstall) {
     workingDirectory = "./any/subfolder"
     doNotUpdatePhar = true
@@ -28,4 +21,11 @@ task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
     configurationFile = '/app/phpunit.xml'
     bootstrapFile = 'test/bootstrap.php'
 }
+
+
+}
+
+apply plugin: 'php-build'
+
+
 
