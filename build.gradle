@@ -1,5 +1,4 @@
-task lou
-{
+
 buildscript {
   repositories {
     maven {
@@ -10,8 +9,12 @@ buildscript {
     classpath "gradle.plugin.org.swissphpfriends:php-build-plugin:0.1-SNAPSHOT"
   }
 }
-}
+
 apply plugin: "org.hasnat.php-build-plugin"
+task lou
+{
+println "sucess"
+}
 
 
 
