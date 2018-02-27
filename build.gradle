@@ -11,11 +11,11 @@ buildscript {
 
 apply plugin: "org.hasnat.php-build-plugin"
 task install(type: org.swissphpfriends.gradle.task.ComposerInstall) {
-    workingDirectory = '/user/'
+    
     doNotUpdatePhar = true
 }
 task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
-    path = '/user/'
+    
     verbose = true
     outputTap = true
 }
