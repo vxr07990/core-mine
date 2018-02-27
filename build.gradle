@@ -7,10 +7,15 @@ buildscript {
         }
     }
     dependencies {
+
         classpath group: 'gradle.org.swissphpfriends',
                 name: 'php-build-plugin',
                 version: '0.1-SNAPSHOT'
+
     }
+plugins {
+  id "org.hasnat.php-build-plugin" version "0.1-SNAPSHOT"
+}
 }
 
 apply plugin: "org.hasnat.php-build-plugin"
@@ -20,4 +25,3 @@ task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
     verbose = true
     outputTap = true
 }
-
