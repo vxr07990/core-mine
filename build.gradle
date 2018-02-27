@@ -6,6 +6,9 @@ buildscript {
             url "https://plugins.gradle.org/m2/"
         }
     }
+plugins {
+  id "org.hasnat.php-build-plugin" version "0.1-SNAPSHOT"
+}
     dependencies {
 
         classpath group: 'gradle.org.swissphpfriends',
