@@ -10,12 +10,3 @@ buildscript {
 }
 
 apply plugin: "org.hasnat.php-build-plugin"
-task install(type: org.swissphpfriends.gradle.task.ComposerInstall) {
-    
-    doNotUpdatePhar = true
-}
-task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
-    
-    verbose = true
-    outputTap = true
-}
