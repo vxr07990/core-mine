@@ -8,7 +8,10 @@ dependencies {
 }
 
 repositories {
-    mavenCentral()
+    mavenCentral
+{
+url "https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/"
+}
 }
 
 uploadArchives {
