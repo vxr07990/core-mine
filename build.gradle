@@ -4,10 +4,7 @@ repositories {
 mavenCentral()
 repository(url:' https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin')
     }
-dependencies {
-    compile gradleApi()
-    compile localGroovy()
-}
+
 
 
 
