@@ -2,20 +2,11 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
-repositories {
-    mavenCentral()
-}
-dependencies {
-    compile gradleApi()
-    compile localGroovy()
-compile 'gradle.org.swissphpfriends:php-build-plugin:0.1-SNAPSHOT'
-}
-
 
 uuploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: uri('../repo'))
+            repository(url:"https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin")
         }
     }
 }
