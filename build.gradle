@@ -1,10 +1,41 @@
 
+apply plugin: 'groovy'
+apply plugin: 'maven'
 
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
+group='org.swissphpfriends'
+version='0.1-SNAPSHOT'
 
 buildscript {
     repositories {
-mavenCentral()
-url:' https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin'
+
+
         maven {
              url "https://plugins.gradle.org/m2/"
         }
