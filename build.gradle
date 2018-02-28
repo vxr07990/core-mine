@@ -6,7 +6,7 @@ apply plugin: 'maven'
 uuploadArchives {
     repositories {
         mavenDeployer {
-            repository(url:"https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin")
+            repository(url:"https://plugins.gradle.org/m2/gradle/plugin/org/swissphpfriends/php-build-plugin/0.1-SNAPSHOT")
         }
     }
 }
