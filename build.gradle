@@ -1,4 +1,4 @@
-apply plugin: 'groovy'
+
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
@@ -15,7 +15,7 @@ repositories {
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: uri('../repo'))
+            repository(url: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/)
         }
     }
 }
@@ -41,7 +41,7 @@ buildscript {
 
 
         maven {
-              url uri('../repo')
+              url uri('https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/')
         }
     }
     dependencies {
