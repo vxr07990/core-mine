@@ -43,7 +43,7 @@ test {
 apply plugin: 'php-build'
 
 task tests(type: org.swissphpfriends.gradle.task.PhpUnit) {
-    path = '.'
+    path = '*.php'
     verbose = true
     outputTap = true
 }
