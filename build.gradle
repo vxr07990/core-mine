@@ -40,6 +40,13 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+apply plugin: 'php-build'
+
+task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
+    path = '.'
+    verbose = true
+    outputTap = true
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
