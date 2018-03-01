@@ -42,7 +42,7 @@ test {
 }
 apply plugin: 'php-build'
 
-task test(type: org.swissphpfriends.gradle.task.PhpUnit) {
+task tests(type: org.swissphpfriends.gradle.task.PhpUnit) {
     path = '.'
     verbose = true
     outputTap = true
